@@ -5,12 +5,13 @@ import {} from '../store/thunks';
 
 export const User = () => {
   const user = useSelector('user');
-  const inputRef = useRef();
+  const idRef = useRef();
+  const nameRef = useRef();
   const dispatch = useDispatch();
   const changeName = () =>
-    dispatch(changeUserName(user.id, { hoTen: inputRef.current.value }));
+    dispatch(changeUserName(user.id, { hoTen: nameRef.current.value }));
   const resetName = () => dispatch(resetNameAction());
-  const getName = () => dispatch(fetchNameId(inputRef.current.value));
+  const getName = () => dispatch(fetchNameId(idRef.current.value));
   const didGetName = user.id !== 0;
 
   return (
@@ -20,9 +21,9 @@ export const User = () => {
           <label>Id</label>
           <input
             type="text"
-            name="name"
-            ref={inputRef}
-            placeholder="Input new name here"
+            name="id"
+            ref={idRef}
+            placeholder="Input an id here"
           />
           <button onClick={getName}>GETNAME</button>
         </div>
@@ -31,8 +32,8 @@ export const User = () => {
           disabled={didGetName ? false : true}
           type="text"
           name="name"
-          ref={inputRef}
-          placeholder="Input an id here"
+          ref={nameRef}
+          placeholder="Input new name here"
         />
         <button disabled={didGetName ? false : true} onClick={changeName}>
           CHANGE
