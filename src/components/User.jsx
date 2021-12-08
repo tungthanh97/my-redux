@@ -4,7 +4,6 @@ import { resetNameAction, fetchNameId, changeUserName } from '../store';
 import {} from '../store/thunks';
 
 export const User = () => {
-  console.log('user rerender');
   const user = useSelector('user');
   const inputRef = useRef();
   const dispatch = useDispatch();
