@@ -16,10 +16,10 @@ export const counterSlice = createSlice({
   initialState: { counter: 0 },
   reducers: {
     incCounter(state) {
-      return { counter: state.counter + 1 };
+      state.counter += 1;
     },
     decCounter(state) {
-      return { counter: state.counter - 1 };
+      state.counter -= 1;
     },
   },
 });
