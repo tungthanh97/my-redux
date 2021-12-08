@@ -1,21 +1,29 @@
-import { cloneDeep } from "lodash-es";
+import { cloneDeep } from 'lodash-es';
 
-export const createStore = (rootReducer) => {
+export const createStore = (rootReducer, enhancer) => {
   //Observer Patern
   let state = rootReducer({}, {});
   let listeners = [];
+
+  if (typeof enhancer !== 'undefined') {
+    if (typeof enhancer !== 'function') {
+      throw new Error(
+        `Expected the enhancer to be a function. Instead, received: '${typeof enhancer}'`,
+      );
+    }
+    return enhancer(createStore)(rootReducer);
+  }
 
   const getState = () => cloneDeep(state);
 
   const dispatch = (action) => {
     state = rootReducer(cloneDeep(state), action);
-    console.log("listener", listeners);
     listeners.forEach((listener) => listener(state));
     return action;
   };
 
   const subscribe = (func) => {
-    if (typeof func === "function") listeners.push(func);
+    if (typeof func === 'function') listeners.push(func);
   };
 
   const unsubscribe = (func) => {

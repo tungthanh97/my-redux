@@ -1,9 +1,8 @@
-import React from "react";
-import { useSelector, useDispatch } from "../my-redux";
-import { incrementAction, decrementAction } from "../store";
+import React from 'react';
+import { useSelector, useDispatch } from '../my-redux';
+import { incrementAction, decrementAction } from '../store';
 
 export const Counter = () => {
-  console.log("counter rerender");
   const { counter } = useSelector((state) => state.counter);
   const dispatch = useDispatch();
   const inc = () => dispatch(incrementAction());

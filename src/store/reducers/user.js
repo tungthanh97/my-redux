@@ -1,13 +1,27 @@
-import { CHANGENAME, RESETNAME } from "../actions";
+import { UPDATE_USER_SUCCESS, FETCH_USER_SUCCESS, RESETNAME } from '../actions';
 
-const initialState = { name: "", age: 0, id: 0, address: "" };
+const initialState = { name: '', id: 0, address: '' };
 
-export const userReducer = (state = initialState, action) => {
-  if (action.type === CHANGENAME) {
-    return { ...state, name: action.name };
+export const userReducer = (state = initialState, { type, payload }) => {
+  if (type === FETCH_USER_SUCCESS) {
+    return {
+      ...state,
+      name: payload.hoTen,
+      id: payload.id,
+      address: payload.diaChi,
+    };
   }
 
-  if (action.type === RESETNAME) {
+  if (type === UPDATE_USER_SUCCESS) {
+    return {
+      ...state,
+      name: payload.hoTen,
+      id: payload.id,
+      address: payload.diaChi,
+    };
+  }
+
+  if (type === RESETNAME) {
     return initialState;
   }
 
