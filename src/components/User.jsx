@@ -1,7 +1,6 @@
 import React, { useRef } from 'react';
 import { useSelector, useDispatch } from '../my-redux';
-import { resetNameAction, fetchNameId, changeUserName } from '../store';
-import {} from '../store/thunks';
+import { resetNameAction, fetchUser, updateUser } from '../store';
 
 export const User = () => {
   const user = useSelector('user');
@@ -9,9 +8,9 @@ export const User = () => {
   const nameRef = useRef();
   const dispatch = useDispatch();
   const changeName = () =>
-    dispatch(changeUserName(user.id, { hoTen: nameRef.current.value }));
+    dispatch(updateUser(user.id, { hoTen: nameRef.current.value }));
   const resetName = () => dispatch(resetNameAction());
-  const getName = () => dispatch(fetchNameId(idRef.current.value));
+  const getName = () => dispatch(fetchUser(idRef.current.value));
   const didGetName = user.id !== 0;
 
   return (
